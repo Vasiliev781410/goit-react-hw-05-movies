@@ -25,6 +25,7 @@ export const Movies = () => {
     useEffect(() => {    
          fetchData();         
         }         
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     ,[filter]);
 
     const onSubmitSearchForm = (filterForm) =>{            
