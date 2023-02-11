@@ -25,7 +25,7 @@ export const Home = () => {
 
     return (
         <>
-            <ListFoundFilms title={"Trending list"} listFilms={films}/>
+            <ListFoundFilms title={"Trending list"} path="movies/" listFilms={films}/>
         </>
     ) 
 }   

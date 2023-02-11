@@ -12,24 +12,25 @@ async function fetchTrandingMovies(page) {
 async function searchMovies(searchText) {
   const query = encodeURIComponent(searchText);
 
-  const url = `${URI}/search/movie?api_key=${API_KEY}&query=${query}`; 
+  const url = `${URI}/search/movie?api_key=${API_KEY}&query=${query}&language=en-US`; 
   const response = await axios.get(url);
-  //console.log(response.data.results);   
+  
   return response.data.results;
 }
 
 async function getTrending() {
-  const url = `${URI}/trending/all/day?api_key=${API_KEY}`; 
+  const url = `${URI}/trending/movie/day?api_key=${API_KEY}`; 
   const response = await axios.get(url); 
-  //console.log(response.data.results);  
+  
   return response.data.results;
 }
 
 
 async function getMovieById(movieId) {
-  const url = `${URI}/movie/${movieId}?api_key=${API_KEY}`;
-
-  return await getRequest(url);
+  const url = `${URI}/movie/${movieId}?api_key=${API_KEY}`; 
+  const response = await axios.get(url); 
+  console.log(response.data);  
+  return response.data;
 }
     
 
