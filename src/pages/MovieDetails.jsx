@@ -1,9 +1,10 @@
 import { useLocation } from "react-router-dom";
-import { Link } from "react-router-dom";
+import { Link, Outlet } from "react-router-dom";
 
 export const MovieDetails = () => {
     const location = useLocation();
     const backLinkHref = location.state?.from ?? "/movies";
+    console.log('pathname: ',location.pathname);
     return (
         <>
             <div> 
@@ -22,6 +23,10 @@ export const MovieDetails = () => {
             </div>
             <div>
                 <p>Additional information</p>
+                <Link to={`${location.pathname}/cast`} >
+                    Cast
+                </Link>
+                <Outlet />
             </div>
         </>
     ) 
