@@ -29,7 +29,7 @@ async function getTrending() {
 async function getMovieById(movieId) {
   const url = `${URI}/movie/${movieId}?api_key=${API_KEY}`; 
   const response = await axios.get(url); 
-  console.log(response.data);  
+  console.log('getMovieById: ',response.data);  
   return response.data;
 }
     
