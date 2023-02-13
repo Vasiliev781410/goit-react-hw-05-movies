@@ -1,4 +1,5 @@
 import {useState, useEffect} from "react";
+import { Suspense } from "react";
 import { Outlet,  useParams} from "react-router-dom";
 import { AdditionalMovieInfo } from "components/AdditionalMovieInfo/AdditionalMovieInfo.jsx";
 import { MovieInfo } from "components/MovieInfo/MovieInfo.jsx";
@@ -40,10 +41,14 @@ export const MovieDetails = () => {
     return (
         <>
             <MovieInfo title={titleS} posterPath={posterPathS} popularity={popularityS} overview={overviewS} genres={genresS}  />          
-            <AdditionalMovieInfo listTitle="Additional information" movieId={movieId} />           
-            <Outlet />              
+            <AdditionalMovieInfo listTitle="Additional information" movieId={movieId} /> 
+            <Suspense fallback={<div>Loading...</div>}>
+                <Outlet />    
+            </Suspense>          
+                          
         </>
     ) 
 }    
 
+export default MovieDetails;
  

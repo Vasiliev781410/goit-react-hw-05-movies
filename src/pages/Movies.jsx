@@ -4,8 +4,7 @@ import { SearchForm } from "components/SearchForm/SearchForm.jsx"
 import {searchMovies}  from '../api/api.js';
 import Notiflix from "notiflix";
 
-
-export const Movies = () => {    
+export  const Movies = () => {    
     const [filter,setFilter] = useState(""); 
     const [films,setFilms] = useState([]); 
 
@@ -42,4 +41,5 @@ export const Movies = () => {
         
     ) 
 }   
-      
+    
+export default Movies;

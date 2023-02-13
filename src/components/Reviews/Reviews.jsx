@@ -36,4 +36,6 @@ return (
   )     
 }
 
+export default Reviews;
+
                                                                            
