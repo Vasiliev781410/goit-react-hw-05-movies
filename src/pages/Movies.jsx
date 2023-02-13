@@ -3,12 +3,14 @@ import { ListFoundFilms } from "components/ListFoundFilms/ListFoundFilms.jsx"
 import { SearchForm } from "components/SearchForm/SearchForm.jsx"
 import {searchMovies}  from '../api/api.js';
 import Notiflix from "notiflix";
+import {  useLocation} from "react-router-dom";
 
 export  const Movies = () => {    
     const [filter,setFilter] = useState(""); 
-    const [films,setFilms] = useState([]); 
-
-    const fetchData = async () => {
+    const [films,setFilms] = useState([]);      
+    const location = useLocation();    
+ 
+    const fetchData = async () => {      
         try {
             const results = await searchMovies(filter);                         
             setFilms([ ...results]);                             
@@ -21,9 +23,12 @@ export  const Movies = () => {
               
         };  
     }
-    useEffect(() => {    
-         fetchData();         
-        }         
+    useEffect(() => {          
+        fetchData();         
+        if (location.search){                  
+            setFilter(new URLSearchParams(location.search).get("query"));  
+        }              
+    }         
     // eslint-disable-next-line react-hooks/exhaustive-deps
     ,[filter]);
 

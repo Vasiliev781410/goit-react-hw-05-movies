@@ -2,7 +2,7 @@ import css from './MovieInfo.module.css';
 import { Link, useLocation} from "react-router-dom";
 
 export const MovieInfo = ({title,posterPath,popularity,overview,genres}) => {
-const location = useLocation();
+    const location = useLocation();
     const backLinkHref = location.state?.from ?? "/movies";  
     return (
         <>
