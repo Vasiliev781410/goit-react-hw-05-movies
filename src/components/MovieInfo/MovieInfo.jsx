@@ -10,7 +10,7 @@ const location = useLocation();
                 <button> {`<-`} Go back</button> 
             </Link>  
             <div className={css.movieInfoContainer}>                  
-                <img className={css.moviePoster} src={`https://image.tmdb.org/t/p/original${posterPath}`} alt={title} loading="lazy" />
+                <img className={css.moviePoster} src={`https://image.tmdb.org/t/p/original${posterPath}`} alt={title} width="350" height="600" loading="lazy" />
                 <div>
                     <h1>{title}</h1>
                     <p>User score: {popularity}%</p>
