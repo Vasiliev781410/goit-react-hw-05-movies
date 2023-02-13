@@ -1,5 +1,5 @@
 import {useState, useEffect} from "react";
-import { Link, Outlet, useLocation, useParams} from "react-router-dom";
+import { Outlet,  useParams} from "react-router-dom";
 import { AdditionalMovieInfo } from "components/AdditionalMovieInfo/AdditionalMovieInfo.jsx";
 import { MovieInfo } from "components/MovieInfo/MovieInfo.jsx";
 import {getMovieById}  from '../api/api.js';
