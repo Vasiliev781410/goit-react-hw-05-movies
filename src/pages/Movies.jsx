@@ -35,7 +35,7 @@ export  const Movies = () => {
     return (
         <>
             <SearchForm onSubmit={onSubmitSearchForm}/>
-            <ListFoundFilms title={""} path="" listFilms={films}/>
+            <ListFoundFilms title={""} path="" listFilms={films} query={filter}/>
         </>
         
         
