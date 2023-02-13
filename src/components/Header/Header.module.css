@@ -3,8 +3,7 @@
     left: 0;
     margin-bottom: 10px;
     width: 100%;    
-    position: static;
-    z-index: 1100;
+    position: static; 
     display: flex;
     justify-content: left;
     align-items: center;

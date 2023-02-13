@@ -1,6 +1,7 @@
 import {useState, useEffect} from "react";
 import { Link, Outlet, useLocation, useParams} from "react-router-dom";
 import { AdditionalMovieInfo } from "components/AdditionalMovieInfo/AdditionalMovieInfo.jsx";
+import { MovieInfo } from "components/MovieInfo/MovieInfo.jsx";
 import {getMovieById}  from '../api/api.js';
 import Notiflix from "notiflix";
 
@@ -9,18 +10,18 @@ export const MovieDetails = () => {
     const [genresS,setGenresS] = useState("");
     const [overviewS,setOverviewS] = useState("");
     const [popularityS,setPopularityS] = useState("");
-    const location = useLocation();
-    const backLinkHref = location.state?.from ?? "/movies";  
+    const [posterPathS,setPosterPathS] = useState("");
     const {movieId} = useParams();
    
     const fetchData = async () => {
         try {
             const aboutMovie = await getMovieById(movieId); 
-            const {title, genres, overview, popularity} = aboutMovie;
+            const {title, genres, overview, popularity, poster_path} = aboutMovie;
             setTitleS(title);
             setGenresS(genres.map(genre=>genre.name).join(", ")); 
             setOverviewS(overview); 
-            setPopularityS(Math.round(popularity));                                      
+            setPopularityS(Math.round(popularity));  
+            setPosterPathS(poster_path);                                     
             if (aboutMovie === undefined) { 
                 Notiflix.Notify.failure('Oops, there is no information about this movie');                               
             }   
@@ -38,20 +39,7 @@ export const MovieDetails = () => {
  
     return (
         <>
-            <div> 
-                <Link to={backLinkHref}>               
-                    <button> {`<-`} Go back</button> 
-                </Link>            
-                <img src="" alt="" />
-                <div>
-                    <h1>{titleS}</h1>
-                    <p>User score: {popularityS}%</p>
-                    <h2> Overview</h2>
-                    <p>{overviewS}</p>
-                    <h3>Genres</h3>
-                    <p>{genresS}</p> 
-                </div>  
-            </div>
+            <MovieInfo title={titleS} posterPath={posterPathS} popularity={popularityS} overview={overviewS} genres={genresS}  />          
             <AdditionalMovieInfo listTitle="Additional information" movieId={movieId} />           
             <Outlet />              
         </>
