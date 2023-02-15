@@ -1,12 +1,10 @@
 import css from './MovieInfo.module.css';
-import { Link, useLocation} from "react-router-dom";
+import { Link } from "react-router-dom";
 
-export const MovieInfo = ({title,posterPath,popularity,overview,genres}) => {
-    const location = useLocation();
-    const backLinkHref = location.state?.from ?? "/movies";  
+export const MovieInfo = ({title,posterPath,popularity,overview,genres, location}) => {
     return (
         <>
-            <Link to={backLinkHref}>               
+            <Link to={location}>               
                 <button> {`<-`} Go back</button> 
             </Link>  
             <div className={css.movieInfoContainer}>                  

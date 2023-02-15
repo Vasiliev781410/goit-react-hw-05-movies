@@ -9,7 +9,7 @@ export const Home = () => {
     const fetchData = async () => {
         try {
             const results = await getTrending();                          
-            setFilms([ ...results]);                             
+            setFilms(results);                             
             if (results.length === 0) { 
                 Notiflix.Notify.failure('Oops, there is no trending films now');                               
             }   

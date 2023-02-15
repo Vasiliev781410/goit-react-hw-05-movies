@@ -3,18 +3,21 @@ import { ListFoundFilms } from "components/ListFoundFilms/ListFoundFilms.jsx"
 import { SearchForm } from "components/SearchForm/SearchForm.jsx"
 import {searchMovies}  from '../api/api.js';
 import Notiflix from "notiflix";
-import {  useLocation} from "react-router-dom";
+import {  useLocation, useSearchParams} from "react-router-dom";
 
-export  const Movies = () => {    
-    const [filter,setFilter] = useState(""); 
+export  const Movies = () => {   
     const [films,setFilms] = useState([]);      
-    const location = useLocation();    
+    const location = useLocation();  
+    const [searchParams, setSearchParams] = useSearchParams(location.search); 
+    let query = searchParams.get("query");
+    //console.log("filter ", filter); 
  
     const fetchData = async () => {      
         try {
-            const results = await searchMovies(filter);                         
-            setFilms([ ...results]);                             
-            if (results.length === 0 && filter !== "") { 
+                     
+            const results = await searchMovies(query);                         
+            setFilms(results);                             
+            if (results.length === 0 && query !== "") { 
                 Notiflix.Notify.failure('Oops, there is no films with that name');                               
             }   
         }
@@ -23,24 +26,25 @@ export  const Movies = () => {
               
         };  
     }
-    useEffect(() => {          
-        fetchData();         
-        if (location.search){                  
-            setFilter(new URLSearchParams(location.search).get("query"));  
-        }              
+    useEffect(() => {
+        if (query){    
+            fetchData(); 
+         }                       
+          
     }         
     // eslint-disable-next-line react-hooks/exhaustive-deps
-    ,[filter]);
+    ,[query]);
 
     const onSubmitSearchForm = (filterForm) =>{            
-        setFilter(filterForm);    
+        //setFilter(filterForm);
+        setSearchParams(`query=${filterForm}`);        
         setFilms([]);    
     }
 
     return (
         <>
             <SearchForm onSubmit={onSubmitSearchForm}/>
-            <ListFoundFilms title={""} path="" listFilms={films} query={filter}/>
+            <ListFoundFilms title={""} path="" listFilms={films} query={query}/>
         </>
         
         

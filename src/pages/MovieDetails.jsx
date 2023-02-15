@@ -1,6 +1,6 @@
 import {useState, useEffect} from "react";
 import { Suspense } from "react";
-import { Outlet,  useParams} from "react-router-dom";
+import { Outlet,  useParams, useLocation} from "react-router-dom";
 import { AdditionalMovieInfo } from "components/AdditionalMovieInfo/AdditionalMovieInfo.jsx";
 import { MovieInfo } from "components/MovieInfo/MovieInfo.jsx";
 import {getMovieById}  from '../api/api.js';
@@ -13,6 +13,8 @@ export const MovieDetails = () => {
     const [popularityS,setPopularityS] = useState("");
     const [posterPathS,setPosterPathS] = useState("");
     const {movieId} = useParams();
+    const location = useLocation();    
+    const backLinkHref = location.state?.from ?? "/movies";  
    
     const fetchData = async () => {
         try {
@@ -40,8 +42,8 @@ export const MovieDetails = () => {
  
     return (
         <>
-            <MovieInfo title={titleS} posterPath={posterPathS} popularity={popularityS} overview={overviewS} genres={genresS}  />          
-            <AdditionalMovieInfo listTitle="Additional information" movieId={movieId} /> 
+            <MovieInfo title={titleS} posterPath={posterPathS} popularity={popularityS} overview={overviewS} genres={genresS} location={backLinkHref} />          
+            <AdditionalMovieInfo listTitle="Additional information" location={backLinkHref}/> 
             <Suspense fallback={<div>Loading...</div>}>
                 <Outlet />    
             </Suspense>          

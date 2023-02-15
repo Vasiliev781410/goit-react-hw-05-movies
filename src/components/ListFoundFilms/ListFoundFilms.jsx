@@ -2,12 +2,9 @@ import { ListFilmItem } from "components/ListFilmItem/ListFilmItem";
 import { Link } from "react-router-dom";
 import { useLocation } from "react-router-dom";
 
-export const ListFoundFilms = ({path,title, listFilms, query}) => {
+export const ListFoundFilms = ({path,title, listFilms}) => {
     const location = useLocation();
-    if (query) {
-        location.search = `?query=${query}`;
-    }; 
-    console.log("location: ",location);
+    //console.log("location: ",location);
     return (
         <ul className="listFilms">
             <h1>{title}</h1>
